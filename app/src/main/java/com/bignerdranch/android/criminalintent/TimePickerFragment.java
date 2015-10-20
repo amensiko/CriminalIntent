@@ -9,6 +9,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
@@ -26,7 +27,7 @@ public class TimePickerFragment extends DialogFragment {
     private static final String ARG_TIME = "time";
 
     private TimePicker mTimePicker;
-    private int year, month, day;
+    private int year, month, day, hour, minute;
     private Date date;
 
     public static TimePickerFragment newInstance(Date date) {
@@ -47,8 +48,8 @@ public class TimePickerFragment extends DialogFragment {
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
-        int hour = calendar.get(Calendar.HOUR);
-        int minute = calendar.get(Calendar.MINUTE);
+        hour = calendar.get(Calendar.HOUR);
+        minute = calendar.get(Calendar.MINUTE);
 
 
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_time, null);
