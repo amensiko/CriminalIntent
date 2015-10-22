@@ -9,6 +9,11 @@ public class CrimeListActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
+        setContentView(getLayoutResId());
         return new CrimeListFragment();
+    }
+
+    protected int getLayoutResId() {
+        return R.layout.activity_masterdetail;
     }
 }

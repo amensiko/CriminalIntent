@@ -23,7 +23,7 @@ public class DatePickerActivity extends SingleFragmentActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(getLayoutResId());
         Date date = (Date)getIntent().getSerializableExtra(EXTRA_DATE);
         Fragment newF = DatePickerFragment.newInstance(date);
 
@@ -37,6 +37,11 @@ public class DatePickerActivity extends SingleFragmentActivity {
     protected Fragment createFragment() {
         Date date = (Date) getIntent().getSerializableExtra(EXTRA_DATE);
         return DatePickerFragment.newInstance(date);
+    }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_masterdetail;
     }
 
 
