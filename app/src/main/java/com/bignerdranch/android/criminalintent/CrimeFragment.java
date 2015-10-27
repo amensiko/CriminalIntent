@@ -167,7 +167,8 @@ public class CrimeFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_item_del_crime:
                 //Toast.makeText(getActivity(), DELETE, Toast.LENGTH_SHORT).show();
-                CrimeLab.get(getActivity()).deleteCrime(mCrime);
+                UUID id = mCrime.getId();
+                CrimeLab.get(getActivity()).deleteCrime(id);
                 getActivity().finish();
                 return true;
             default:

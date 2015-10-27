@@ -49,10 +49,10 @@ public class CrimeLab {
         mDatabase.insert(CrimeTable.NAME, null, values);
     }
 
-    public void deleteCrime(Crime c) {
+    public void deleteCrime(UUID id) {
         //mCrimes.remove(c);    //Removed in chapter 14
         //ContentValues values = getContentValues(c);
-        String uuidString = c.getId().toString();
+        String uuidString = id.toString();
         mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.UUID + " = ?", new String[]{uuidString});
         //mDatabase.update(CrimeTable.NAME, null, values);
     }
