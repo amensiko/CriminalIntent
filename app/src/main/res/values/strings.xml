@@ -27,4 +27,6 @@
         <item quantity="other">%1$s crimes</item>
     </plurals>
 
+    <string name="empty_list">There are no crimes</string>
+
 </resources>

@@ -6,13 +6,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +32,9 @@ public class CrimeListFragment extends Fragment {
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
 
     private int mChangedPosition;
+
+    private LinearLayout mLinLayout;
+    private Button mAdd;
 
     //private static final String POSITION_OF_CRIME = "position_of_crime";
 
@@ -48,6 +54,9 @@ public class CrimeListFragment extends Fragment {
         if (savedInstanceState != null) {
             mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
         }
+
+        mLinLayout = (LinearLayout) view.findViewById(R.id.empty_crime_list);
+        mAdd = (Button) view.findViewById(R.id.add_crime);
 
         updateUI();
 
@@ -114,8 +123,8 @@ public class CrimeListFragment extends Fragment {
     }
 
     private void updateUI() {
-        CrimeLab crimeLab = CrimeLab.get(getActivity());
-        List<Crime> crimes = crimeLab.getCrimes();
+        final CrimeLab crimeLab = CrimeLab.get(getActivity());
+        final List<Crime> crimes = crimeLab.getCrimes();
 
         if (mAdapter == null) {
             mAdapter = new CrimeAdapter(crimes);
@@ -130,6 +139,23 @@ public class CrimeListFragment extends Fragment {
             else {
                 mAdapter.notifyItemChanged(getArguments().getInt(POSITION_OF_CRIME));
             }*/
+        }
+
+        if (crimes.size() <= 0) {
+            mLinLayout.setVisibility(View.VISIBLE);
+            mAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("CrimeListFragment", "onClick");
+                    Crime crime = new Crime();
+                    CrimeLab.get(getActivity()).addCrime(crime);
+                    Intent intent = CrimePagerActivity.newIntent(getActivity(), crime.getId());
+                    startActivity(intent);
+                }
+            });
+        }
+        else {
+            mLinLayout.setVisibility(View.GONE);
         }
 
         updateSubtitle();
